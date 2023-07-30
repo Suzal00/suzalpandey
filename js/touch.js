@@ -33,11 +33,11 @@ function animateCloudBall(event) {
 document.addEventListener("mousemove", animateCloudBall);
 
 // Touch events for mobile devices
-document.addEventListener("touchmove", (event) => {
+window.addEventListener("touchmove", (event) => {
   isScrolling = true;
   animateCloudBall(event);
 });
 
-document.addEventListener("touchend", () => {
+window.addEventListener("touchend", () => {
   isScrolling = false;
 });
