@@ -1,8 +1,11 @@
 const colors = ["#00C2FF", "#0072FF", "#FF0063", "#FFBB00", "#FF5733", "#00FFAA"];
 
 let animateCloudBallFragment = document.createDocumentFragment();
+let isScrolling = false;
 
 function animateCloudBall(event) {
+  if (isScrolling) return; // Ignore touchmove events during scrolling
+
   let cloudBall = document.createElement("div");
   cloudBall.classList = "cloud-ball";
   animateCloudBallFragment.appendChild(cloudBall);
@@ -28,4 +31,13 @@ function animateCloudBall(event) {
 }
 
 document.addEventListener("mousemove", animateCloudBall);
-document.addEventListener("touchmove", animateCloudBall);
+
+// Touch events for mobile devices
+document.addEventListener("touchmove", (event) => {
+  isScrolling = true;
+  animateCloudBall(event);
+});
+
+document.addEventListener("touchend", () => {
+  isScrolling = false;
+});
