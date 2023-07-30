@@ -4,8 +4,6 @@ let animateCloudBallFragment = document.createDocumentFragment();
 let isScrolling = false;
 
 function animateCloudBall(event) {
-  if (isScrolling) return; // Ignore touchmove events during scrolling
-
   let cloudBall = document.createElement("div");
   cloudBall.classList = "cloud-ball";
   animateCloudBallFragment.appendChild(cloudBall);
@@ -33,11 +31,14 @@ function animateCloudBall(event) {
 document.addEventListener("mousemove", animateCloudBall);
 
 // Touch events for mobile devices
-window.addEventListener("touchmove", (event) => {
-  isScrolling = true;
+document.addEventListener("touchmove", (event) => {
   animateCloudBall(event);
 });
 
-window.addEventListener("touchend", () => {
-  isScrolling = false;
+// Scroll events for mobile devices
+window.addEventListener("scroll", () => {
+  isScrolling = true;
+  setTimeout(() => {
+    isScrolling = false;
+  }, 100); // Adjust this delay as needed based on your preference
 });
