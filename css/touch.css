@@ -1,0 +1,32 @@
+.cloud-ball {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #00C2FF, #EAF6F6);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    animation: pulsate 0.5s infinite alternate, rotate 2s linear;
+  }
+  
+  @keyframes pulsate {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
