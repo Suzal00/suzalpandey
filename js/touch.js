@@ -1,7 +1,6 @@
 const colors = ["#00C2FF", "#0072FF", "#FF0063", "#FFBB00", "#FF5733", "#00FFAA"];
 
 let animateCloudBallFragment = document.createDocumentFragment();
-let isScrolling = false;
 
 function animateCloudBall(event) {
   let cloudBall = document.createElement("div");
@@ -32,13 +31,7 @@ document.addEventListener("mousemove", animateCloudBall);
 
 // Touch events for mobile devices
 document.addEventListener("touchmove", (event) => {
+  // Prevent default touchmove behavior to avoid scrolling interference
+  event.preventDefault();
   animateCloudBall(event);
-});
-
-// Scroll events for mobile devices
-window.addEventListener("scroll", () => {
-  isScrolling = true;
-  setTimeout(() => {
-    isScrolling = false;
-  }, 100); // Adjust this delay as needed based on your preference
 });
