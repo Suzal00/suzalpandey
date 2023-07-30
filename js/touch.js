@@ -3,10 +3,6 @@ const colors = ["#00C2FF", "#0072FF", "#FF0063", "#FFBB00", "#FF5733", "#00FFAA"
 let animateCloudBallFragment = document.createDocumentFragment();
 
 function animateCloudBall(event) {
-  if (event.pointerType === "touch") {
-    event.preventDefault(); // Prevent scrolling interference on touch devices
-  }
-
   let cloudBall = document.createElement("div");
   cloudBall.classList = "cloud-ball";
   animateCloudBallFragment.appendChild(cloudBall);
@@ -15,8 +11,13 @@ function animateCloudBall(event) {
   let color = colors[Math.floor(Math.random() * colors.length)];
   cloudBall.style.background = `radial-gradient(circle, ${color}, #EAF6F6)`;
 
-  cloudBall.style.left = event.clientX - 10 + "px";
-  cloudBall.style.top = event.clientY - 10 + "px";
+  if (event.type === "mousemove") {
+    cloudBall.style.left = event.clientX - 10 + "px";
+    cloudBall.style.top = event.clientY - 10 + "px";
+  } else if (event.type === "touchmove") {
+    cloudBall.style.left = event.touches[0].clientX - 10 + "px";
+    cloudBall.style.top = event.touches[0].clientY - 10 + "px";
+  }
 
   setTimeout(() => {
     cloudBall.style.opacity = 0;
@@ -26,15 +27,10 @@ function animateCloudBall(event) {
   }, 300); // Time (in milliseconds) to wait before making the cloud ball disappear
 }
 
-document.addEventListener("pointermove", animateCloudBall);
+document.addEventListener("mousemove", animateCloudBall);
 
 // Touch events for mobile devices
-document.addEventListener("touchstart", (event) => {
-  animateCloudBall(event);
-});
-
 document.addEventListener("touchmove", (event) => {
-  event.preventDefault(); // Prevent scrolling interference on touch devices
   animateCloudBall(event);
 });
 
