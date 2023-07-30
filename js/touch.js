@@ -14,9 +14,11 @@ function animateCloudBall(event) {
   if (event.type === "mousemove") {
     cloudBall.style.left = event.clientX - 10 + "px";
     cloudBall.style.top = event.clientY - 10 + "px";
-  } else if (event.type === "touchmove") {
-    cloudBall.style.left = event.touches[0].clientX - 10 + "px";
-    cloudBall.style.top = event.touches[0].clientY - 10 + "px";
+  } else if (event.type === "touchmove" || event.type === "scroll") {
+    let touchX = event.clientX || event.touches[0].clientX;
+    let touchY = event.clientY || event.touches[0].clientY;
+    cloudBall.style.left = touchX - 10 + "px";
+    cloudBall.style.top = touchY - 10 + "px";
   }
 
   setTimeout(() => {
@@ -30,11 +32,7 @@ function animateCloudBall(event) {
 document.addEventListener("mousemove", animateCloudBall);
 
 // Touch events for mobile devices
-document.addEventListener("touchstart", (event) => {
-  animateCloudBall(event);
-});
+document.addEventListener("touchmove", animateCloudBall);
 
-document.addEventListener("touchmove", (event) => {
-  event.preventDefault(); // Prevent scrolling interference on touch devices
-  animateCloudBall(event);
-});
+// Scroll events for mobile devices
+document.addEventListener("scroll", animateCloudBall);
