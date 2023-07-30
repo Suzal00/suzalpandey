@@ -37,3 +37,8 @@ document.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent scrolling interference on touch devices
   animateCloudBall(event);
 });
+
+// Scroll events for mobile devices
+document.addEventListener("scroll", (event) => {
+  animateCloudBall(event);
+});
